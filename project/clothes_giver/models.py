@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 TYPES = (
-    (1, 'Fundation'),
+    (1, 'Foundation'),
     (2, 'Non-governmental organization'),
     (3, 'Local collection')
 )
