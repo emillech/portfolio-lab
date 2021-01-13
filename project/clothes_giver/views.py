@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from clothes_giver.models import Category, Institution, Donation
 
 
 class LandingPage(View):
