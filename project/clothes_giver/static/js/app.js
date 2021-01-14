@@ -253,3 +253,21 @@ document.addEventListener("DOMContentLoaded", function() {
     new FormSteps(form);
   }
 });
+
+
+let categories = document.querySelectorAll('.categories');
+let institution = document.querySelectorAll('.institution');
+
+for (let i = 1; i < categories.length+1; i++) {
+    let checkbox = categories[i-1].querySelector('#category'+i)
+
+    if (checkbox.checked) {
+        for (let i = 0; i < institution.length; i++) {
+            if (institution[i].id.includes(checkbox.value))
+                institution[i].style.display = 'inline'
+        }
+    }
+    else {
+
+    }
+}

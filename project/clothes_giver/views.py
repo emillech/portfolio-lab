@@ -52,9 +52,11 @@ class AddDonation(LoginRequiredMixin, View):
 
     def get(self, request):
         all_categories = Category.objects.all()
+        all_institution = Institution.objects.all()
 
         ctx = {
-            'categories': all_categories
+            'categories': all_categories,
+            'institutions': all_institution,
         }
 
         return render(request, 'form.html', ctx)
