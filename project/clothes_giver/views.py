@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from clothes_giver.models import Category, Institution, Donation
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout, login
 
 
 class LandingPage(View):
@@ -33,12 +33,15 @@ class LandingPage(View):
             categories = Category.objects.filter(institution=local)
             locals_data.update({local: categories})
 
+        user = request.user
+
         ctx = {
             'quantity': quantity,
             'institutions': number_of_institutions,
             'foundations': foundations_data,
             'ngo': ngos_data,
-            'local': locals_data
+            'local': locals_data,
+            'user': user,
         }
         return render(request, 'index.html', ctx)
 
@@ -61,6 +64,7 @@ class Login(View):
 
         user = authenticate(username=username, password=password)
         if user is not None:
+            login(request, user)
             return redirect('/')
         else:
             return redirect('/register/')
@@ -87,3 +91,16 @@ class Register(View):
                 last_name=surname)
 
         return redirect('/login/')
+
+
+class LogoutView(View):
+    """
+    A class used to represent a Logout. It does not need template.
+    """
+
+    def get(self, request):
+        """
+        This method logout user and redirect him to index.
+        """
+        logout(request)
+        return redirect("/")
