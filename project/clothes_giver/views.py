@@ -3,6 +3,7 @@ from django.views import View
 from clothes_giver.models import Category, Institution, Donation
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class LandingPage(View):
@@ -46,11 +47,17 @@ class LandingPage(View):
         return render(request, 'index.html', ctx)
 
 
-class AddDonation(View):
+class AddDonation(LoginRequiredMixin, View):
+    login_url = '/login/'
 
     def get(self, request):
+        all_categories = Category.objects.all()
 
-        return render(request, 'form.html')
+        ctx = {
+            'categories': all_categories
+        }
+
+        return render(request, 'form.html', ctx)
 
 
 class Login(View):
