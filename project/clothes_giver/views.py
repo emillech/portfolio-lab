@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from clothes_giver.models import Category, Institution, Donation
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 class LandingPage(View):
@@ -54,6 +55,16 @@ class Login(View):
     def get(self, request):
         return render(request, 'login.html')
 
+    def post(self, request):
+        username = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            return redirect('/')
+        else:
+            return redirect('/register/')
+
 
 class Register(View):
 
@@ -68,12 +79,11 @@ class Register(View):
         password_2 = request.POST.get('password2')
 
         if password == password_2:
-            User.objects.create(
+            User.objects.create_user(
                 username=email,
                 password=password,
                 email=email,
                 first_name=name,
                 last_name=surname)
-
 
         return redirect('/login/')
