@@ -123,3 +123,16 @@ class LogoutView(View):
         """
         logout(request)
         return redirect("/")
+
+
+class UserView(View):
+
+    def get(self, request):
+
+        user = request.user
+
+        ctx = {
+            'user': user
+        }
+
+        return render(request, 'user_site.html', ctx)

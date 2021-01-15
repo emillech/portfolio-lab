@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  <title>Index</title>
+{% endblock %}
+
+    {% block start_header %}
+  <header>
+    {% endblock %}
+
+    {% block end_header %}
+  </header>
+    {% endblock %}
+
+{% block content %}
+
+    <section class="login-page">
+      <h2>Panel Użytkownika</h2>
+        <h3>Imię: {{ user.first_name }}</h3>
+        <h3>Nazwisko: {{ user.last_name }}</h3>
+        <h3>Email: {{ user.email }}</h3>
+
+    </section>
+
+{% endblock %}
