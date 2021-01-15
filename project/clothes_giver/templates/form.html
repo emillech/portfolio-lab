@@ -85,8 +85,8 @@
                 >
               </label>
             </div>
-            {% endfor %}
 
+            {% endfor %}
             <div class="form-group form-group--buttons">
               <button type="button" class="btn next-step">Dalej</button>
             </div>
@@ -116,19 +116,27 @@
             <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
 
-            {% for institution in institutions %}
-            <div class="form-group form-group--checkbox institution" id="1 2 3" style="display:none">
+            {% for key, item in dict.items %}
+
+            <div class="form-group form-group--checkbox institution"
+
+                 id="
+                         {% for category in item %}
+                 {{category.id}}
+                  {% endfor %}"
+                 style="display:none">
               <label>
                 <input type="radio" name="organization" value="old" />
                 <span class="checkbox radio"></span>
                 <span class="description">
-                  <div class="title">{{ institution.name }}</div>
+                  <div class="title">{{ key.name }}</div>
                   <div class="subtitle">
-                    Cel i misja: {{ institution.description }}
+                    Cel i misja: {{ key.description }}
                   </div>
                 </span>
               </label>
             </div>
+
             {% endfor %}
 
 
