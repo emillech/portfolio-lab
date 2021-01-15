@@ -15,10 +15,22 @@
 {% block content %}
 
     <section class="login-page">
-      <h2>Panel Użytkownika</h2>
+      <h2>Dane Użytkownika</h2>
         <h3>Imię: {{ user.first_name }}</h3>
         <h3>Nazwisko: {{ user.last_name }}</h3>
         <h3>Email: {{ user.email }}</h3>
+
+        <h2>Lista darów</h2>
+
+        {% for key, item in donations.items %}
+            <h3>Dla: {{key.institution}}</h3>
+            <h3>Liczba worków: {{key.quantity}}</h3>
+            {% for category in item %}
+            <h3>Kategorie: {{category}}</h3>
+            {% endfor %}
+            <h3>Kiedy: {{key.pick_up_date}} {{key.pick_up_time}}</h3>
+        <hr><hr>
+        {% endfor %}
 
     </section>
 

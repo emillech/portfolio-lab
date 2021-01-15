@@ -130,9 +130,16 @@ class UserView(View):
     def get(self, request):
 
         user = request.user
+        user_donations = Donation.objects.filter(user=user)
+        donation_dict = {}
+
+        for donation in user_donations:
+            categories = Category.objects.filter(institution=donation.institution)
+            donation_dict.update({donation: categories})
 
         ctx = {
-            'user': user
+            'user': user,
+            'donations': donation_dict
         }
 
         return render(request, 'user_site.html', ctx)
