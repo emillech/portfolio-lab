@@ -280,3 +280,4 @@ for (let i = 1; i < categories.length+1; i++) {
     })
 
 }
+

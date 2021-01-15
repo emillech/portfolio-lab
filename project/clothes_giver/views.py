@@ -67,6 +67,10 @@ class AddDonation(LoginRequiredMixin, View):
 
         return render(request, 'form.html', ctx)
 
+    def post(self, request):
+
+        return render(request, 'form-confirmation.html')
+
 
 class Login(View):
 
