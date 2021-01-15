@@ -260,14 +260,23 @@ let institution = document.querySelectorAll('.institution');
 
 for (let i = 1; i < categories.length+1; i++) {
     let checkbox = categories[i-1].querySelector('#category'+i)
-
-    if (checkbox.checked) {
+    checkbox.addEventListener('click', function(){
+        if (checkbox.checked) {
         for (let i = 0; i < institution.length; i++) {
-            if (institution[i].id.includes(checkbox.value))
+            if (institution[i].id.includes(checkbox.value)) {
                 institution[i].style.display = 'inline'
+            }
+
         }
     }
     else {
+            for (let i = 0; i < institution.length; i++) {
+            if (institution[i].id.includes(checkbox.value)) {
+                institution[i].style.display = 'none'
+            }
 
+        }
     }
+    })
+
 }
