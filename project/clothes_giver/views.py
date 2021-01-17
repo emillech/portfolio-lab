@@ -130,7 +130,8 @@ class UserView(View):
     def get(self, request):
 
         user = request.user
-        user_donations = Donation.objects.filter(user=user)
+        user_donations = Donation.objects.filter(user=user).order_by('is_taken')
+
         donation_dict = {}
 
         for donation in user_donations:
@@ -140,6 +141,31 @@ class UserView(View):
         ctx = {
             'user': user,
             'donations': donation_dict
+        }
+
+        return render(request, 'user_site.html', ctx)
+
+    def post(self, request):
+
+        donation_id = request.POST.get('donation_id')
+        int(donation_id)
+        chosen_donation = Donation.objects.get(id=donation_id)
+        chosen_donation.is_taken = True
+        chosen_donation.save()
+
+        user = request.user
+        user_donations = Donation.objects.filter(user=user).order_by('is_taken')
+
+        donation_dict = {}
+
+        for donation in user_donations:
+            categories = Category.objects.filter(institution=donation.institution)
+            donation_dict.update({donation: categories})
+
+        ctx = {
+            'user': user,
+            'donations': donation_dict,
+            'aaa': chosen_donation
         }
 
         return render(request, 'user_site.html', ctx)

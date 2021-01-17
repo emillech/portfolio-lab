@@ -21,15 +21,34 @@
         <h3>Email: {{ user.email }}</h3>
 
         <h2>Lista darów</h2>
+        {{ aaa }}
 
         {% for key, item in donations.items %}
+        {% if key.is_taken is True %}
+        <div style="color: grey">
+        {% else %}
+        <div>
+        {% endif %}
             <h3>Dla: {{key.institution}}</h3>
             <h3>Liczba worków: {{key.quantity}}</h3>
             {% for category in item %}
             <h3>Kategorie: {{category}}</h3>
             {% endfor %}
             <h3>Kiedy: {{key.pick_up_date}} {{key.pick_up_time}}</h3>
-        <hr><hr>
+            <h3>Zabrane:
+            {% if key.is_taken is True %}
+                Tak
+            {% else %}
+                Nie
+            {% endif %}
+            </h3>
+        </div>
+        <form method="post">
+        {% csrf_token %}
+          <input type="hidden" value="{{key.id}}" name="donation_id">
+          <button class="btn" type="submit">Archiwizuj</button>
+        </form>
+        <hr>
         {% endfor %}
 
     </section>

@@ -45,5 +45,6 @@ class Donation(models.Model):
         null=True,
         default=None
     )
+    is_taken = models.BooleanField(default=False)
 
 
