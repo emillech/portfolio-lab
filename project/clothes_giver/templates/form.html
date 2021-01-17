@@ -100,7 +100,7 @@
             <div class="form-group form-group--inline">
               <label>
                 Liczba 60l worków:
-                <input type="number" name="bags" step="1" min="1" />
+                <input type="number" name="bags" step="1" min="1" class="bags"/>
               </label>
             </div>
 
@@ -131,6 +131,7 @@
                 <span class="checkbox radio"></span>
                 <span class="description">
                   <div class="title">{{ key.name }}</div>
+                  <input type="hidden" class='inst_title' value="{{key.name}}">
                   <div class="subtitle">
                     Cel i misja: {{ key.description }}
                   </div>

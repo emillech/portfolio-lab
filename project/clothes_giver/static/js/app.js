@@ -281,3 +281,15 @@ for (let i = 1; i < categories.length+1; i++) {
 
 }
 
+let bags = document.querySelector('.bags')
+let title = document.querySelectorAll('.inst_title')
+
+
+for (let i=0; i < title.length; i++) {
+    if (title[i].checked){
+        console.log(title[i].value)
+    }
+}
+
+
+
