@@ -125,7 +125,8 @@ class LogoutView(View):
         return redirect("/")
 
 
-class UserView(View):
+class UserView(LoginRequiredMixin, View):
+    login_url = '/login/'
 
     def get(self, request):
 
@@ -169,3 +170,36 @@ class UserView(View):
         }
 
         return render(request, 'user_site.html', ctx)
+
+
+class EditUser(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request):
+        return render(request, 'edit_user.html')
+
+    def post(self, request):
+
+        user = request.user
+        # password = user.password
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('new_password')
+        new_password_2 = request.POST.get('new_password2')
+        text = ''
+
+        user = authenticate(username=user.username, password=old_password)
+        if user is not None:
+            if new_password == new_password_2:
+                user.set_password(new_password)
+                user.save()
+                text = 'Hasło zostało zmienione'
+            else:
+                text = 'Hasła nie pasują do siebie'
+        else:
+            text = 'Podałeś błędne hasło'
+
+        ctx = {
+            'text': text,
+        }
+
+        return render(request, 'edit_user.html', ctx)

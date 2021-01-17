@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  <title>Login</title>
+{% endblock %}
+
+    {% block start_header %}
+  <header>
+    {% endblock %}
+
+    {% block end_header %}
+  </header>
+    {% endblock %}
+
+{% block content %}
+
+    <section class="login-page">
+      <h2>Zmień hasło</h2>
+        {{ text }}
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="password" name="old_password" placeholder=" Stare hasło" />
+        </div>
+        <div class="form-group">
+          <input type="password" name="new_password" placeholder="Nowe hasło" />
+        </div>
+        <div class="form-group">
+          <input type="password" name="new_password2" placeholder="Powtórz nowe hasło" />
+        </div>
+        <div class="form-group">
+          <button class="btn" type="submit">Zmień</button>
+        </div>
+      </form>
+    </section>
+
+{% endblock %}
