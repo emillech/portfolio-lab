@@ -69,7 +69,37 @@ class AddDonation(LoginRequiredMixin, View):
 
     def post(self, request):
 
-        return render(request, 'form-confirmation.html')
+        user = request.user
+        quantity = request.POST.get('bags')
+        categories = request.POST.get('categories')
+
+        institution = request.POST.get('institution_name')
+        institution_object = Institution.objects.get(name=institution)
+        address = request.POST.get('address')
+        phone_number = int(request.POST.get('phone'))
+        city = request.POST.get('city')
+        zip_code = request.POST.get('postcode')
+        pick_up_date = request.POST.get('data')
+        pick_up_time = request.POST.get('time')
+        pick_up_comment = request.POST.get('more_info')
+
+        try:
+            Donation.objects.create(
+                quantity=quantity,
+                institution=44,
+                address=address,
+                phone_number=phone_number,
+                city=city,
+                zip_code=zip_code,
+                pick_up_date=pick_up_date,
+                pick_up_time=pick_up_time,
+                pick_up_comment=pick_up_comment,
+                user=user
+            )
+            return redirect('/')
+
+        except:
+            return redirect('/login/')
 
 
 class Login(View):
@@ -203,3 +233,9 @@ class EditUser(LoginRequiredMixin, View):
         }
 
         return render(request, 'edit_user.html', ctx)
+
+
+class ConfirmationView(View):
+
+    def get(self, request):
+        return render(request, 'form-confirmation.html')

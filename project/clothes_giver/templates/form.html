@@ -64,7 +64,7 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form method="post">
           {% csrf_token %}
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
@@ -131,7 +131,7 @@
                 <span class="checkbox radio"></span>
                 <span class="description">
                   <div class="title">{{ key.name }}</div>
-                  <input type="hidden" class='inst_title' value="{{key.name}}">
+                  <input type="hidden" class='inst_title' value="{{key.name}}" name="institution_name">
                   <div class="subtitle">
                     Cel i misja: {{ key.description }}
                   </div>
@@ -248,7 +248,8 @@
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>
-              <button type="submit" class="btn">Potwierdzam</button>
+              <button type="submit" name="submit" class="btn">Potwierdzam</button>
+
             </div>
           </div>
         </form>
