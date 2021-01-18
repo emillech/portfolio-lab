@@ -83,8 +83,7 @@ class AddDonation(LoginRequiredMixin, View):
         pick_up_time = request.POST.get('time')
         pick_up_comment = request.POST.get('more_info')
 
-        try:
-            Donation.objects.create(
+        Donation.objects.create(
                 quantity=quantity,
                 institution=44,
                 address=address,
@@ -96,10 +95,10 @@ class AddDonation(LoginRequiredMixin, View):
                 pick_up_comment=pick_up_comment,
                 user=user
             )
-            return redirect('/')
 
-        except:
-            return redirect('/login/')
+
+
+
 
 
 class Login(View):
