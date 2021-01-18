@@ -282,14 +282,76 @@ for (let i = 1; i < categories.length+1; i++) {
 }
 
 let bags = document.querySelector('.bags')
-let title = document.querySelectorAll('.inst_title')
+bags.addEventListener('input', function(){
+    let number_of_bags = bags.value
+    let text = document.querySelector('.summary--text')
+    text.innerHTML = number_of_bags + ' worki ubrań w dobrym stanie dla dzieci'
+})
 
-
-for (let i=0; i < title.length; i++) {
-    if (title[i].checked){
-        console.log(title[i].value)
+for (i=0; i<institution.length; i++){
+    let radio = institution[i].querySelector('#radio-check')
+        radio.addEventListener('click', function(){
+            if (radio.checked){
+                var company_name = radio.value
+                let text = document.querySelector('.company_name')
+                text.innerHTML = 'Dla ' + company_name
+            }
+    })
     }
-}
+
+let address = document.querySelector('#address')
+address.addEventListener('input', function(){
+    let street = address.value
+    let text = document.querySelector('.address').querySelectorAll('li')[0]
+    text.innerHTML = street
+})
+
+let city = document.querySelector('#city')
+city.addEventListener('input', function(){
+    let city_name = city.value
+    let text = document.querySelector('.address').querySelectorAll('li')[1]
+    text.innerHTML = city_name
+})
+
+let postcode = document.querySelector('#postcode')
+postcode.addEventListener('input', function(){
+    let postcode_number = postcode.value
+    let text = document.querySelector('.address').querySelectorAll('li')[2]
+    text.innerHTML = postcode_number
+})
+
+let phone = document.querySelector('#phone')
+phone.addEventListener('input', function(){
+    let phone_number = phone.value
+    let text = document.querySelector('.address').querySelectorAll('li')[3]
+    text.innerHTML = phone_number
+})
+
+let date = document.querySelector('#data')
+date.addEventListener('change', function(){
+    let date_data = this.value
+    let text = document.querySelector('.date_time').querySelectorAll('li')[0]
+    text.innerHTML = date_data
+})
+
+let time = document.querySelector('#time')
+time.addEventListener('change', function(){
+    let time_data = this.value
+    let text = document.querySelector('.date_time').querySelectorAll('li')[1]
+    text.innerHTML = time_data
+})
+
+let more_info = document.querySelector('#more_info')
+more_info.addEventListener('change', function(){
+    let info = this.value
+    let text = document.querySelector('.date_time').querySelectorAll('li')[2]
+    text.innerHTML = info
+})
+
+
+
+
+
 
 
 
